@@ -1,0 +1,32 @@
+package Planner.Modelos;
+
+public class Asignatura {
+    private String codigo;
+    private String nombre;
+
+    public Asignatura(String codigo, String nombre) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+    }
+
+    // === GETTERS Y SETTERS ===
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    // === MÉTODOS ===
+
+    public boolean igualesAsignaturas(Asignatura a) {
+        return codigo.equals(a.getCodigo());
+    }
+
+    @Override
+    public String toString() {
+        return "Código: " + codigo + " | Nombre: " + nombre;
+    }
+}
