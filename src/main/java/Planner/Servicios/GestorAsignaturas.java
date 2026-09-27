@@ -12,6 +12,8 @@ public class GestorAsignaturas {
         this.listaAsignaturas = new ArrayList<>();
     }
 
+    // === MÉTODOS ===
+
     public boolean existeCodigo(String codigo) {
         for (Asignatura a : listaAsignaturas) {
             if (a.verificarCodigo(codigo)) {
@@ -29,8 +31,6 @@ public class GestorAsignaturas {
         listaAsignaturas.add(nuevaAsignatura);
         return true;
     }
-
-
 
     public boolean eliminarAsignatura(String codigo) {
         Asignatura asignatura = buscarPorCodigo(codigo);

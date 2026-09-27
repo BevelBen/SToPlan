@@ -24,6 +24,8 @@ public class MenuPrincipal {
         gestorEstudiantes.agregarEstudiante("22382508725", "Bnejmain", "123");
     }
 
+    // === MÉTODOS ===
+
     public void Menu() {
         while (true) {
             mostrarOpciones();

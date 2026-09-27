@@ -23,6 +23,15 @@ public class GestorEstudiantes {
         return true;
     }
 
+    public boolean eliminarEstudiante(String matricula) {
+        Estudiante estudiante = buscarPorMatricula(matricula);
+        if (estudiante == null) {
+            return false;
+        }
+        listaEstudiantes.remove(estudiante);
+        return true;
+    }
+
     public boolean existeMatricula(String m) {
         for (Estudiante e : listaEstudiantes) {
             if (e.getMatricula().equals(m)) {
