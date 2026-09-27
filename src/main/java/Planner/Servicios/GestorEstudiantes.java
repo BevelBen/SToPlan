@@ -1,5 +1,6 @@
 package Planner.Servicios;
 
+import Planner.Modelos.Asignatura;
 import Planner.Modelos.Estudiante;
 
 import java.util.ArrayList;
@@ -41,13 +42,29 @@ public class GestorEstudiantes {
         return false;
     }
 
-    public Estudiante buscarPorMatricula(String m) {
+    public Estudiante buscarPorMatricula(String matricula) {
         for (Estudiante e : listaEstudiantes) {
-            if (e.getMatricula().equals(m)) {
+            if (e.getMatricula().equals(matricula)) {
                 return e;
             }
         }
         return null;
+    }
+
+    public boolean agregarAsignaturaInteresada(String matricula, Asignatura asignatura) {
+        Estudiante estudiante = buscarPorMatricula(matricula);
+        if (estudiante == null) {
+            return false;
+        }
+        return estudiante.agregarAsignaturaInteresada(asignatura);
+    }
+
+    public boolean eliminarAsignaturaInteresada(String matricula, Asignatura asignatura) {
+        Estudiante estudiante = buscarPorMatricula(matricula);
+        if (estudiante == null) {
+            return false;
+        }
+        return estudiante.eliminarAsignaturaInteresada(asignatura);
     }
 
     public String nombrePorMatricula(String m) {
@@ -81,5 +98,19 @@ public class GestorEstudiantes {
 
     public List<Estudiante> totalidadEstudiantes() {
         return listaEstudiantes;
+    }
+
+    public int cantidadEstudiantes() {
+        return listaEstudiantes.size();
+    }
+
+    public List<Estudiante> estudiantesPorAsignatura(Asignatura a) {
+        List<Estudiante> estudiantesAsignatura = new ArrayList<>();
+        for (Estudiante e : listaEstudiantes) {
+            if (e.interesadoAsignatura(a)) {
+                estudiantesAsignatura.add(e);
+            }
+        }
+        return estudiantesAsignatura;
     }
 }
