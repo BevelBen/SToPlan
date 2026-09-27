@@ -21,6 +21,10 @@ public class Asignatura {
 
     // === MÉTODOS ===
 
+    public boolean verificarCodigo(String codigo) {
+        return this.codigo.equals(codigo);
+    }
+
     public boolean igualesAsignaturas(Asignatura a) {
         return codigo.equals(a.getCodigo());
     }

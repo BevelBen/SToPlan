@@ -10,8 +10,6 @@ public class GestorEstudiantes {
 
     public GestorEstudiantes() {
         this.listaEstudiantes = new ArrayList<>();
-        listaEstudiantes.add(new Estudiante("22382508725", "Benjamin", "123clave"));
-        listaEstudiantes.add(new Estudiante("12345678901", "Alejandro", "contra10"));
     }
 
     // === MÉTODOS ===
