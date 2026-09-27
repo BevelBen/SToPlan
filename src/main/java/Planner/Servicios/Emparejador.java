@@ -20,4 +20,8 @@ public class Emparejador {
         }
         return comun;
     }
+
+    public int cantidadHorariosComunes(Estudiante estudianteUno, Estudiante estudianteDos) {
+        return periodosComunes(estudianteUno, estudianteDos).size();
+    }
 }
