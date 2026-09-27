@@ -41,7 +41,7 @@ public class GestorEstudiantes {
         return false;
     }
 
-    private Estudiante buscarPorMatricula(String m) {
+    public Estudiante buscarPorMatricula(String m) {
         for (Estudiante e : listaEstudiantes) {
             if (e.getMatricula().equals(m)) {
                 return e;
@@ -53,7 +53,7 @@ public class GestorEstudiantes {
     public String nombrePorMatricula(String m) {
         Estudiante estudianteMatricula = buscarPorMatricula(m);
         if (estudianteMatricula != null) {
-            return estudianteMatricula.getMatricula();
+            return estudianteMatricula.getNombre();
         }
         return null;
     }
