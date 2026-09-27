@@ -1,13 +1,19 @@
 package Planner.Vistas;
 
 import Planner.Servicios.Emparejador;
+import Planner.Servicios.GestorAsignaturas;
 import Planner.Servicios.GestorEstudiantes;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class MenuPrincipal {
+    // DATOS PARA ACCEDER A LA CUENTA DE ADMINISTRADOR
+    private final String ADMIN_PASSWORD = "admin";
+
     private Scanner scanner;
     private GestorEstudiantes gestorEstudiantes;
+    private GestorAsignaturas gestorAsignaturas;
     private Emparejador emparejador;
 
     public MenuPrincipal() {
@@ -27,6 +33,7 @@ public class MenuPrincipal {
             }
             ejecutarOpcion(opcion);
         }
+        IO.println("Saliendo del programa...");
     }
 
     private String pedirCadena() {
@@ -43,7 +50,7 @@ public class MenuPrincipal {
                 } else {
                     return opcion;
                 }
-            } catch (NumberFormatException e) {
+            } catch (InputMismatchException e) {
                 IO.println("La opción debe ser un número, intente denuevo.");
             }
         }
@@ -61,6 +68,7 @@ public class MenuPrincipal {
                 inicioSesionEstudiante();
                 break;
             case 2:
+
                 break;
         }
     }
@@ -85,5 +93,20 @@ public class MenuPrincipal {
         }
 
         IO.println("Contraseña correcta, ingresando al siguiente menu.");
+
+        // TODO Aca se sigue a la funcionalidad del siguiente menu.
+    }
+
+    private void inicioSesionAdministrador() {
+        IO.println("Ingrese la contraseña del admministrador");
+        String clave = pedirCadena();
+
+        if (!clave.equals(ADMIN_PASSWORD)) {
+            IO.println("Contraseña del administrador incorrecta.");
+        }
+
+        IO.println("Contraseña correcta, ingresando al siguiente menu.");
+
+        // TODO Aca se sigue a la funcionalidad del siguiente menu.
     }
 }
