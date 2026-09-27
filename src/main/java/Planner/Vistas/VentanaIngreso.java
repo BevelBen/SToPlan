@@ -1,4 +1,4 @@
-package Planner.Vista;
+package Planner.Vistas;
 
 import Planner.Servicios.GestorEstudiantes;
 

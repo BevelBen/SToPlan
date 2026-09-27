@@ -2,7 +2,7 @@ package Planner;
 
 import Planner.Servicios.Emparejador;
 import Planner.Servicios.GestorEstudiantes;
-import Planner.Vista.VentanaIngreso;
+import Planner.Vistas.VentanaIngreso;
 
 public class Launcher {
     static void main(String[] args) {
