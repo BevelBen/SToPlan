@@ -1,10 +1,10 @@
 package Planner;
 
-import Planner.Vistas.VentanaIngreso;
+import Planner.Vistas.MenuPrincipal;
 
 public class Launcher {
     static void main(String[] args) {
-        VentanaIngreso ventanalogin = new VentanaIngreso();
-        ventanalogin.mostrarVentana();
+        MenuPrincipal menuPrincipal = new MenuPrincipal();
+        menuPrincipal.Menu();
     }
 }
