@@ -21,7 +21,7 @@ public class MenuPrincipal {
         gestorEstudiantes = new GestorEstudiantes();
         emparejador = new Emparejador();
 
-        gestorEstudiantes.agregarEstudiante("22382508725", "Bnejmain", "123");
+        gestorEstudiantes.agregarEstudiante("22382508725", "Benjmain", "123");
     }
 
     // === MÉTODOS ===
@@ -70,7 +70,7 @@ public class MenuPrincipal {
                 inicioSesionEstudiante();
                 break;
             case 2:
-
+                inicioSesionAdministrador();
                 break;
         }
     }
@@ -105,6 +105,7 @@ public class MenuPrincipal {
 
         if (!clave.equals(ADMIN_PASSWORD)) {
             IO.println("Contraseña del administrador incorrecta.");
+            return;
         }
 
         IO.println("Contraseña correcta, ingresando al siguiente menu.");
