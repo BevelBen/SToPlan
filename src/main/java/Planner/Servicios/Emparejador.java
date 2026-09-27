@@ -24,4 +24,20 @@ public class Emparejador {
     public int cantidadHorariosComunes(Estudiante estudianteUno, Estudiante estudianteDos) {
         return periodosComunes(estudianteUno, estudianteDos).size();
     }
+
+    public List<Periodo> periodosDisponibles(List<Estudiante> estudiantes) {
+        if (estudiantes.isEmpty()) {
+            return null;
+        }
+
+        List<Periodo> periodosComunes = estudiantes.getFirst().getPeriodosDisponibilidad();
+
+        for (Estudiante estudiante : estudiantes) {
+            periodosComunes.retainAll(estudiante.getPeriodosDisponibilidad());
+            if (periodosComunes.isEmpty()) {
+                return null;
+            }
+        }
+        return periodosComunes;
+    }
 }
