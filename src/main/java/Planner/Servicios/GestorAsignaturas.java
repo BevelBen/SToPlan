@@ -49,4 +49,8 @@ public class GestorAsignaturas {
         }
         return null;
     }
+
+    public List<Asignatura> totalidadAsignaturas() {
+        return listaAsignaturas;
+    }
 }
