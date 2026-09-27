@@ -30,7 +30,8 @@ public class Emparejador {
             return null;
         }
 
-        List<Periodo> periodosComunes = estudiantes.getFirst().getPeriodosDisponibilidad();
+        // Se crea una nueva lista de periodos comunes para no mutar la lista original del estudiante elegido.
+        List<Periodo> periodosComunes = new ArrayList<>(estudiantes.getFirst().getPeriodosDisponibilidad());
 
         for (Estudiante estudiante : estudiantes) {
             periodosComunes.retainAll(estudiante.getPeriodosDisponibilidad());
