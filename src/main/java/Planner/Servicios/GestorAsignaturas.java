@@ -20,4 +20,33 @@ public class GestorAsignaturas {
         }
         return false;
     }
+
+    public boolean agregarAsignatura(String codigo, String nombre) {
+        if (existeCodigo(codigo)) {
+            return false;
+        }
+        Asignatura nuevaAsignatura = new Asignatura(codigo, nombre);
+        listaAsignaturas.add(nuevaAsignatura);
+        return true;
+    }
+
+
+
+    public boolean eliminarAsignatura(String codigo) {
+        Asignatura asignatura = buscarPorCodigo(codigo);
+        if (asignatura == null) {
+            return false;
+        }
+        listaAsignaturas.remove(asignatura);
+        return true;
+    }
+
+    public Asignatura buscarPorCodigo(String codigo) {
+        for (Asignatura asignatura : listaAsignaturas) {
+            if (asignatura.verificarCodigo(codigo)) {
+                return asignatura;
+            }
+        }
+        return null;
+    }
 }
