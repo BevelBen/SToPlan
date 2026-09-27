@@ -25,8 +25,15 @@ public class Asignatura {
         return this.codigo.equals(codigo);
     }
 
-    public boolean igualesAsignaturas(Asignatura a) {
-        return codigo.equals(a.getCodigo());
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Asignatura)) {
+            return false;
+        }
+        return codigo.equals(((Asignatura) o).getCodigo());
     }
 
     @Override
