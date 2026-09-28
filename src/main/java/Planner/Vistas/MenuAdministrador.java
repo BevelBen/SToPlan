@@ -192,4 +192,16 @@ public class MenuAdministrador {
         IO.println("Ya existe una asignatura con ese código.");
     }
 
+    private Asignatura escogerAsignatura() {
+        List<Asignatura> asignaturas = gestorAsignaturas.totalidadAsignaturas();
+        if (asignaturas.isEmpty()) {
+            IO.println("No hay asignaturas disponibles.");
+            return null;
+        }
+        enumerarAsignaturas();
+        IO.println("Ingrese el número de la asignatura:");
+        int indice = pedirOpcion(1, asignaturas.size());
+        return asignaturas.get(indice - 1);
+    }
+
 }
