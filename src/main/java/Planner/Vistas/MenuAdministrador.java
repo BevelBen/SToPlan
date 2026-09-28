@@ -104,4 +104,7 @@ public class MenuAdministrador {
         return true;
     }
 
+    private String pedirCadena() {
+        return scanner.next();
+    }
 }
