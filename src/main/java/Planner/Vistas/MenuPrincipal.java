@@ -113,6 +113,7 @@ public class MenuPrincipal {
 
         IO.println("Contraseña correcta, ingresando al siguiente menu.");
 
-        // TODO Aca se sigue a la funcionalidad del siguiente menu.
+        MenuAdministrador menuAdministrador = new MenuAdministrador(scanner, gestorEstudiantes, gestorAsignaturas, emparejador);
+        menuAdministrador.Menu();
     }
 }
