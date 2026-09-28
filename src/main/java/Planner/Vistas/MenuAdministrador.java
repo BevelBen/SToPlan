@@ -216,4 +216,17 @@ public class MenuAdministrador {
         estudiante.eliminarAsignaturaInteresada(asignatura);
     }
 
+    private List<Periodo> generarHorariosComunes(Asignatura a) {
+        List<Estudiante> estudiantesAsignatura = gestorEstudiantes.estudiantesPorAsignatura(a);
+        if (estudiantesAsignatura.isEmpty()) {
+            IO.println("No hay estudiantes inscritos en la asignatura.");
+            return null;
+        }
+        List<Periodo> periodosComun = emparejador.periodosDisponibles(estudiantesAsignatura);
+        if (periodosComun.isEmpty()) {
+            IO.println("No hay periodos en comun para este grupo.");
+        }
+        return periodosComun;
+    }
+
 }
