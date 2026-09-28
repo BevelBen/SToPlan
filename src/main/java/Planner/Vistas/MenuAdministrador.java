@@ -166,4 +166,17 @@ public class MenuAdministrador {
         IO.println("La matrícula ingresada no existe.");
     }
 
+    private void enumerarAsignaturas() {
+        List<Asignatura> asignaturas = gestorAsignaturas.totalidadAsignaturas();
+        if (asignaturas.isEmpty()) {
+            IO.println("No hay asignaturas registradas.");
+            return;
+        }
+        int i = 1;
+        for (Asignatura a : asignaturas) {
+            IO.println(i + ". " + a);
+            i++;
+        }
+    }
+
 }
