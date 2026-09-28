@@ -179,4 +179,17 @@ public class MenuAdministrador {
         }
     }
 
+    private void agregarAsignatura() {
+        IO.println("Ingrese el código:");
+        String codigo = pedirCadena();
+        IO.println("Ingrese el nombre:");
+        String nombre = pedirCadena();
+
+        if (gestorAsignaturas.agregarAsignatura(codigo, nombre)) {
+            IO.println("La asignatura fue ingresada correctamente.");
+            return;
+        }
+        IO.println("Ya existe una asignatura con ese código.");
+    }
+
 }
