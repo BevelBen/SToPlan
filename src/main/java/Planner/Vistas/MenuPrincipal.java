@@ -48,13 +48,16 @@ public class MenuPrincipal {
         while (true) {
             try {
                 int opcion;
-                opcion = scanner.nextInt();
+                opcion = Integer.valueOf(scanner.nextLine());
+
                 if (min > opcion || opcion > max) {
                     IO.println("El numero debe estar entre " + min + " y " + max + ", intente denuevo.");
                 } else {
                     return opcion;
                 }
             } catch (InputMismatchException e) {
+                IO.println("La opción debe ser un número, intente denuevo.");
+            } catch (NumberFormatException e) {
                 IO.println("La opción debe ser un número, intente denuevo.");
             }
         }
