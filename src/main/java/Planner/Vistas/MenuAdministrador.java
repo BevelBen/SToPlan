@@ -151,4 +151,19 @@ public class MenuAdministrador {
         }
     }
 
+    private void eliminarEstudiante() {
+        if (gestorEstudiantes.cantidadEstudiantes() == 0) {
+            IO.println("No hay estudiantes inscritos.");
+            return;
+        }
+        verAsignaturas();
+        IO.println("Ingrese la matrícula del estudiante que desea eliminar:");
+        String matricula = pedirCadena();
+        if (gestorEstudiantes.eliminarEstudiante(matricula)) {
+            IO.println("El estudiante fue eliminado exitosamente.");
+            return;
+        }
+        IO.println("La matrícula ingresada no existe.");
+    }
+
 }
