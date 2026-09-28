@@ -107,4 +107,20 @@ public class MenuAdministrador {
     private String pedirCadena() {
         return scanner.next();
     }
+
+    private void registrarEstudiante() {
+        IO.println("Ingrese la matrícula del estudiante:");
+        String matricula = pedirCadena();
+        IO.println("Ingrese el nombre del estudiante:");
+        String nombre = pedirCadena();
+        IO.println("Ingrese la contraseña del estudiante:");
+        String password = pedirCadena();
+
+        if (gestorEstudiantes.agregarEstudiante(matricula, nombre, password)) {
+            IO.println("El estudiante fue ingresado exitosamente.");
+            return;
+        }
+        IO.println("Ya existe un estudiante con la matrícula " + matricula);
+    }
+
 }
