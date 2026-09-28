@@ -235,4 +235,10 @@ public class MenuAdministrador {
         }
     }
 
+    private void horariosComunes() {
+        Asignatura asignaturaInteres = escogerAsignatura();
+        List<Periodo> periodosComunes = generarHorariosComunes(asignaturaInteres);
+        verHorariosComunes(periodosComunes);
+    }
+
 }
