@@ -140,4 +140,15 @@ public class MenuAdministrador {
         return estudiante;
     }
 
+    private void verAsignaturas() {
+        List<Asignatura> asignaturas = gestorAsignaturas.totalidadAsignaturas();
+        if (asignaturas.isEmpty()) {
+            IO.println("No hay asignaturas registradas.");
+            return;
+        }
+        for (Asignatura a : asignaturas) {
+            IO.println(" > " + a);
+        }
+    }
+
 }
