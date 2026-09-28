@@ -48,13 +48,16 @@ public class MenuPrincipal {
         while (true) {
             try {
                 int opcion;
-                opcion = scanner.nextInt();
+                opcion = Integer.valueOf(scanner.nextLine());
+
                 if (min > opcion || opcion > max) {
                     IO.println("El numero debe estar entre " + min + " y " + max + ", intente denuevo.");
                 } else {
                     return opcion;
                 }
             } catch (InputMismatchException e) {
+                IO.println("La opción debe ser un número, intente denuevo.");
+            } catch (NumberFormatException e) {
                 IO.println("La opción debe ser un número, intente denuevo.");
             }
         }
@@ -99,7 +102,9 @@ public class MenuPrincipal {
 
         IO.println("Contraseña correcta, ingresando al siguiente menu.");
 
-        // TODO Aca se sigue a la funcionalidad del siguiente menu.
+        Estudiante estudianteSesion = gestorEstudiantes.buscarPorMatricula(matricula);
+        MenuEstudiante menuEstudiante = new MenuEstudiante(scanner, estudianteSesion);
+        menuEstudiante.Menu();
     }
 
     private void inicioSesionAdministrador() {
