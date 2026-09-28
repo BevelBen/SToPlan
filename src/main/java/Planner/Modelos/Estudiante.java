@@ -78,6 +78,10 @@ public class Estudiante {
         return false;
     }
 
+    public boolean interesadoAsignatura(Asignatura a ) {
+        return asignaturasInteresadas.contains(a);
+    }
+
     public boolean agregarAsignaturaInteresada(Asignatura a) {
         if (!asignaturasInteresadas.contains(a)) {
             asignaturasInteresadas.add(a);

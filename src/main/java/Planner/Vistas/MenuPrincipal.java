@@ -1,5 +1,6 @@
 package Planner.Vistas;
 
+import Planner.Modelos.Estudiante;
 import Planner.Servicios.Emparejador;
 import Planner.Servicios.GestorAsignaturas;
 import Planner.Servicios.GestorEstudiantes;
@@ -19,6 +20,7 @@ public class MenuPrincipal {
     public MenuPrincipal() {
         scanner = new Scanner(System.in);
         gestorEstudiantes = new GestorEstudiantes();
+        gestorAsignaturas = new GestorAsignaturas();
         emparejador = new Emparejador();
 
         gestorEstudiantes.agregarEstudiante("22382508725", "Benjmain", "123");
@@ -92,6 +94,7 @@ public class MenuPrincipal {
 
         if (gestorEstudiantes.verificarLogin(matricula, clave) == null) {
             IO.println("Contraseña incorrecta.");
+            return;
         }
 
         IO.println("Contraseña correcta, ingresando al siguiente menu.");
