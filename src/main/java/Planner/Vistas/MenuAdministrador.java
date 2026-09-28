@@ -242,4 +242,16 @@ public class MenuAdministrador {
         verHorariosComunes(periodosComunes);
     }
 
+    private void agregarAsignaturaInteres() {
+        Asignatura asignatura = escogerAsignatura();
+        if (asignatura == null) {
+            return;
+        }
+        Estudiante estudiante = escogerEstudiante();
+        if (estudiante == null) {
+            return;
+        }
+        estudiante.agregarAsignaturaInteresada(asignatura);
+    }
+
 }
