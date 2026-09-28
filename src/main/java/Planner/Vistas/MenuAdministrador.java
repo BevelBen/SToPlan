@@ -92,4 +92,16 @@ public class MenuAdministrador {
         }
     }
 
+    private boolean verEstudiantes() {
+        List<Estudiante> estudiantes = gestorEstudiantes.totalidadEstudiantes();
+        if (estudiantes.isEmpty()) {
+            IO.println("No hay estudiantes inscritos.");
+            return false;
+        }
+        for (Estudiante e : estudiantes) {
+            IO.println(" > " + e);
+        }
+        return true;
+    }
+
 }
