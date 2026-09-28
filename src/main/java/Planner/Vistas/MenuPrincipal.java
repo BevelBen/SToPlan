@@ -102,7 +102,9 @@ public class MenuPrincipal {
 
         IO.println("Contraseña correcta, ingresando al siguiente menu.");
 
-        // TODO Aca se sigue a la funcionalidad del siguiente menu.
+        Estudiante estudianteSesion = gestorEstudiantes.buscarPorMatricula(matricula);
+        MenuEstudiante menuEstudiante = new MenuEstudiante(scanner, estudianteSesion);
+        menuEstudiante.Menu();
     }
 
     private void inicioSesionAdministrador() {
