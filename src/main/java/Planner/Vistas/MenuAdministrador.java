@@ -75,12 +75,12 @@ public class MenuAdministrador {
         IO.println("7. Generar horarios disponibles");
         IO.println("\n\n\n8. Volver");
     }
-
     private int pedirOpcion(int min, int max) {
         while (true) {
             try {
                 int opcion;
-                opcion = scanner.nextInt();
+                opcion = Integer.valueOf(scanner.nextLine());
+
                 if (min > opcion || opcion > max) {
                     IO.println("El numero debe estar entre " + min + " y " + max + ", intente denuevo.");
                 } else {
@@ -88,10 +88,11 @@ public class MenuAdministrador {
                 }
             } catch (InputMismatchException e) {
                 IO.println("La opción debe ser un número, intente denuevo.");
+            } catch (NumberFormatException e) {
+                IO.println("La opción debe ser un número, intente denuevo.");
             }
         }
     }
-
     private boolean verEstudiantes() {
         List<Estudiante> estudiantes = gestorEstudiantes.totalidadEstudiantes();
         if (estudiantes.isEmpty()) {
