@@ -204,4 +204,16 @@ public class MenuAdministrador {
         return asignaturas.get(indice - 1);
     }
 
+    private void eliminarAsignaturaInteres() {
+        Asignatura asignatura = escogerAsignatura();
+        if (asignatura == null) {
+            return;
+        }
+        Estudiante estudiante = escogerEstudiante();
+        if (estudiante == null) {
+            return;
+        }
+        estudiante.eliminarAsignaturaInteresada(asignatura);
+    }
+
 }
