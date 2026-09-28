@@ -229,4 +229,10 @@ public class MenuAdministrador {
         return periodosComun;
     }
 
+    private void verHorariosComunes(List<Periodo> periodos) {
+        for (Periodo p : periodos) {
+            IO.println(" > " + p);
+        }
+    }
+
 }
