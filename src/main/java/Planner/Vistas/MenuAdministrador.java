@@ -123,4 +123,21 @@ public class MenuAdministrador {
         IO.println("Ya existe un estudiante con la matrícula " + matricula);
     }
 
+    private Estudiante escogerEstudiante() {
+        List<Estudiante> estudiantes = gestorEstudiantes.totalidadEstudiantes();
+        if (estudiantes.isEmpty()) {
+            IO.println("No hay estudiantes inscritos.");
+            return null;
+        }
+        verEstudiantes();
+        IO.println("Ingrese la matricula del estudiante:");
+        String matricula = pedirCadena();
+
+        Estudiante estudiante = gestorEstudiantes.buscarPorMatricula(matricula);
+        if (estudiante == null) {
+            IO.println("No existe un estudiante con esa matrícula.");
+        }
+        return estudiante;
+    }
+
 }
