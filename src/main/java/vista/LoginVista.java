@@ -2,6 +2,7 @@ package vista;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class LoginVista {
     private final JFrame frame = new JFrame("Login");
@@ -29,5 +30,25 @@ public class LoginVista {
     public void limpiarCampos() {
         txtUsuario.setText("");
         txtPassword.setText("");
+    }
+
+    public String getUsuario() {
+        return txtUsuario.getText();
+    }
+
+    public char[] getPassword() {
+        return txtPassword.getPassword();
+    }
+
+    public void agregarLoginListener(ActionListener a) {
+        btnLogin.addActionListener(a);
+    }
+
+    public void mostrarError(String errorMessage) {
+        JOptionPane.showMessageDialog(frame, errorMessage, "Ha ocurrido un error", JOptionPane.WARNING_MESSAGE);
+    }
+
+    public void mostrarMensaje(String dialogMessage) {
+        JOptionPane.showMessageDialog(frame, dialogMessage);
     }
 }
