@@ -1,10 +1,7 @@
 package modelo.repositorio.memoria;
 
-import modelo.Clase;
-import modelo.Estudiante;
+import modelo.*;
 import modelo.repositorio.UsuarioRepositorio;
-import modelo.Rut;
-import modelo.Usuario;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -18,6 +15,8 @@ public class UsuarioRepositorioMemoria implements UsuarioRepositorio {
         guardarUsuario(estudiante1);
         Estudiante estudiante2 = new Estudiante(Rut.generarRut("108704578"), "NuevoEstudiante", "24", 2023);
         guardarUsuario(estudiante2);
+        Administrador administrador1 = new Administrador(Rut.generarRut("5.592.940-8"), "Funcionario1", "1");
+        guardarUsuario(administrador1);
     }
 
     @Override

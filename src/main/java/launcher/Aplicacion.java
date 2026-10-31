@@ -1,11 +1,13 @@
 package launcher;
 
+import controlador.AdministradorController;
 import controlador.EstudianteController;
 import controlador.LoginController;
 import modelo.Administrador;
 import modelo.Estudiante;
 import modelo.Usuario;
 import modelo.repositorio.memoria.UsuarioRepositorioMemoria;
+import vista.AdministradorVista;
 import vista.EstudianteVista;
 import vista.LoginVista;
 
@@ -38,8 +40,8 @@ public class Aplicacion {
     }
 
     private void iniciarSesionAdministrador(Administrador administrador) {
-        // TODO
-        throw new UnsupportedOperationException("No se ha implementado la función.");
+        AdministradorVista administradorVista = new AdministradorVista();
+        new AdministradorController(administrador, administradorVista, this::cerrarSesion).iniciarVista();
     }
 
     private void cerrarSesion() {
