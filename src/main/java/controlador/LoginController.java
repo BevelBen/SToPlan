@@ -21,20 +21,32 @@ public class LoginController {
 
     private void intentarLogin() {
         try {
-            Rut rut = Rut.generarRut(vista.getUsuario());
-            String password = new String(vista.getPassword());
+            Rut rut = leerRut();
+            String password = leerPassword();
             Usuario usuario = usuarios.buscarPorRut(rut);
 
-            if (usuario == null) {
-                vista.mostrarMensaje("No existe el usuario.");
-            } else if (usuario.iniciarSesion(password)) {
-                vista.limpiarCampos();
-                vista.mostrarMensaje("Se inició sesión con éxito.");
-            } else {
-                vista.mostrarMensaje("La clave es incorrecta.");
-            }
+            procesarLogin(usuario, password);
         } catch (IllegalArgumentException | IllegalStateException e) {
             vista.mostrarError(e.getMessage());
+        }
+    }
+
+    private Rut leerRut() {
+        return Rut.generarRut(vista.getUsuario());
+    }
+
+    private String leerPassword() {
+        return new String(vista.getPassword());
+    }
+
+    private void procesarLogin(Usuario usuario, String password) {
+        if (usuario == null) {
+            vista.mostrarMensaje("No existe el usuario.");
+        } else if (usuario.iniciarSesion(password)) {
+            vista.limpiarCampos();
+            vista.mostrarMensaje("Se inició sesión con éxito.");
+        } else {
+            vista.mostrarMensaje("La clave es incorrecta.");
         }
     }
 }
