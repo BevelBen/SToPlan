@@ -15,7 +15,7 @@ public class UsuarioRepositorioMemoria implements UsuarioRepositorio {
         guardarUsuario(estudiante1);
         Estudiante estudiante2 = new Estudiante(Rut.generarRut("108704578"), "NuevoEstudiante", "24", 2023);
         guardarUsuario(estudiante2);
-        Administrador administrador1 = new Administrador(Rut.generarRut("5.592.940-8"), "Funcionario1", "1");
+        Administrador administrador1 = new Administrador(Rut.generarRut("11.111.111-1"), "Funcionario1", "admin");
         guardarUsuario(administrador1);
     }
 
