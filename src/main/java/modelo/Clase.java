@@ -41,6 +41,11 @@ public class Clase {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(codigo);
+    }
+
+    @Override
     public String toString() {
         return "Código: " + codigo + " | Nombre: " + nombre;
     }
