@@ -1,8 +1,8 @@
 package Planner.Modelos;
 
 public class Asignatura {
-    private String codigo;
-    private String nombre;
+    private final String codigo;
+    private final String nombre;
 
     public Asignatura(String codigo, String nombre) {
         this.codigo = codigo;
@@ -27,13 +27,16 @@ public class Asignatura {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof Asignatura)) {
+        if (o == null) {
             return false;
         }
-        return codigo.equals(((Asignatura) o).getCodigo());
+
+        if (o.getClass() != this.getClass()) {
+            return false;
+        }
+
+        Asignatura otro = (Asignatura) o;
+        return codigo.equals(otro.getCodigo());
     }
 
     @Override
