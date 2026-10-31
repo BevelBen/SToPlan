@@ -14,7 +14,8 @@ public class LoginVista {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
         frame.setSize(500,500);
-        frame.setLayout(new FlowLayout());
+        frame.setLayout(new GridLayout(5, 1, 5, 5));
+        frame.setLocationRelativeTo(null);
 
         frame.add(new JLabel("Usuario:"));
         frame.add(txtUsuario);
