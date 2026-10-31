@@ -13,6 +13,11 @@ import java.util.Map;
 public class UsuarioRepositorioMemoria implements UsuarioRepositorio {
     private final Map<Rut, Usuario> usuarios = new LinkedHashMap<>();
 
+    public UsuarioRepositorioMemoria() {
+        Estudiante estudianteNuevo = new Estudiante(Rut.generarRut("223825087"), "Benjamin", "24", 2025);
+        guardarUsuario(estudianteNuevo);
+    }
+
     @Override
     public void guardarUsuario(Usuario usuario) {
         if (usuarios.containsKey(usuario.getRut())) {
