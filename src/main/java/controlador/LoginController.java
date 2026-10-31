@@ -58,4 +58,8 @@ public class LoginController {
         vista.ocultarVentana();
         alIniciarSesion.accept(usuario);
     }
+
+    public void mostrarVista() {
+        vista.mostrarVentana();
+    }
 }

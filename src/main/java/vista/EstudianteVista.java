@@ -33,4 +33,8 @@ public class EstudianteVista {
     public void agregarCerrarSesionListener(ActionListener a) {
         btnCerrarSesion.addActionListener(a);
     }
+
+    public void cerrarVentana() {
+        frame.dispose();
+    }
 }

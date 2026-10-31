@@ -10,10 +10,18 @@ import vista.EstudianteVista;
 import vista.LoginVista;
 
 public class Aplicacion {
+    private final LoginVista loginVista;
+    private final UsuarioRepositorioMemoria usuarios;
+    private final LoginController loginController;
+
+    public Aplicacion() {
+        this.loginVista = new LoginVista();
+        this.usuarios = new UsuarioRepositorioMemoria();
+        this.loginController  = new LoginController(loginVista, usuarios, this::iniciarSesion);
+    }
+
     public void iniciar() {
-        UsuarioRepositorioMemoria usuarios = new UsuarioRepositorioMemoria();
-        LoginVista loginVista = new LoginVista();
-        new LoginController(loginVista, usuarios, this::iniciarSesion).iniciarVista();
+        loginController.iniciarVista();
     }
 
     private void iniciarSesion(Usuario usuario) {
@@ -26,11 +34,15 @@ public class Aplicacion {
 
     private void iniciarSesionEstudiante(Estudiante estudiante) {
         EstudianteVista estudianteVista = new EstudianteVista();
-        new EstudianteController(estudiante, estudianteVista).iniciarVista();
+        new EstudianteController(estudiante, estudianteVista, this::cerrarSesion).iniciarVista();
     }
 
     private void iniciarSesionAdministrador(Administrador administrador) {
         // TODO
         throw new UnsupportedOperationException("No se ha implementado la función.");
+    }
+
+    private void cerrarSesion() {
+        loginController.mostrarVista();
     }
 }
