@@ -7,18 +7,23 @@ import java.awt.event.ActionListener;
 public class AdministradorVista {
     private final JFrame frame = new JFrame();
     private final JLabel lblDatosAdministrador = new JLabel();
-    private final JButton btnCerrarSesion = new JButton();
+    private final JButton btnCerrarSesion = new JButton("Cerrar Sesión");
 
     public AdministradorVista() {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1000,1000);
         frame.setLayout(new BorderLayout(8, 8));
+        ((JComponent) frame.getContentPane()).setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
 
         JPanel encabezado = new JPanel(new BorderLayout());
         encabezado.add(lblDatosAdministrador, BorderLayout.WEST);
         encabezado.add(btnCerrarSesion, BorderLayout.EAST);
+        frame.add(encabezado, BorderLayout.NORTH);
 
-        frame.add(encabezado, BorderLayout.CENTER);
+        JTabbedPane tabs = new JTabbedPane();
+        tabs.addTab("Calcular periodos", construirCalcularPeriodos());
+        tabs.addTab("Estudiantes", construirEditarEstudiantes());
+        frame.add(tabs, BorderLayout.SOUTH);
     }
 
     public void mostrarVentana() {
@@ -36,5 +41,35 @@ public class AdministradorVista {
 
     public void cerrarVentana() {
         frame.dispose();
+    }
+
+    private JPanel construirCalcularPeriodos() {
+        JPanel panel = new JPanel(new BorderLayout(12, 0));
+        panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        JPanel izquierda = new JPanel();
+        izquierda.add(new JLabel("Elegir estudiantes y clase"));
+        panel.add(izquierda, BorderLayout.WEST);
+
+        JPanel derecha = new JPanel();
+        derecha.add(new JLabel("Ver resultados y calcular los periodos, elegir semana"));
+        panel.add(derecha, BorderLayout.EAST);
+
+        return panel;
+    }
+
+    private JPanel construirEditarEstudiantes() {
+        JPanel panel = new JPanel(new BorderLayout(12, 0));
+        panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        JPanel arriba = new JPanel();
+        arriba.add(new JLabel("Registrar estudiantes"));
+        panel.add(arriba, BorderLayout.NORTH);
+
+        JPanel abajo = new JPanel();
+        abajo.add(new JLabel("Ver estudiantes en tabla"));
+        panel.add(abajo, BorderLayout.SOUTH);
+
+        return panel;
     }
 }
