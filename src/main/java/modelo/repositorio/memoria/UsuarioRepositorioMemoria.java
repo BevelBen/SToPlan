@@ -14,8 +14,10 @@ public class UsuarioRepositorioMemoria implements UsuarioRepositorio {
     private final Map<Rut, Usuario> usuarios = new LinkedHashMap<>();
 
     public UsuarioRepositorioMemoria() {
-        Estudiante estudianteNuevo = new Estudiante(Rut.generarRut("223825087"), "Benjamin", "24", 2025);
-        guardarUsuario(estudianteNuevo);
+        Estudiante estudiante1 = new Estudiante(Rut.generarRut("223825087"), "Benjamin", "24", 2025);
+        guardarUsuario(estudiante1);
+        Estudiante estudiante2 = new Estudiante(Rut.generarRut("108704578"), "NuevoEstudiante", "24", 2023);
+        guardarUsuario(estudiante2);
     }
 
     @Override
