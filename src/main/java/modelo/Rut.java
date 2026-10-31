@@ -81,8 +81,8 @@ public final class Rut {
     }
 
     /**
-     * La cadena RUT con puntos y guion a partir del objeto Rut.
-     * @return
+     * Formatea el objeto Rut como una cadena.
+     * @return La cadena RUT con puntos y guion a partir del objeto Rut.
      */
     public String formatear() {
         String conPuntos = String.format("%,d", Long.parseLong(cuerpo)).replace(',', '.');
