@@ -1,4 +1,4 @@
-package Planner.Modelos;
+package modelo;
 
 import java.util.Objects;
 
