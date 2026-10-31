@@ -24,10 +24,6 @@ public abstract class Usuario {
         return nombre;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
     public boolean iniciarSesion(String password) {
         return this.password.equals(password);
     }
