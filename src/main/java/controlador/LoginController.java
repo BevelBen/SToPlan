@@ -5,13 +5,17 @@ import modelo.Usuario;
 import modelo.repositorio.UsuarioRepositorio;
 import vista.LoginVista;
 
+import java.util.function.Consumer;
+
 public class LoginController {
     private final LoginVista vista;
     private final UsuarioRepositorio usuarios;
+    private final Consumer<Usuario> alIniciarSesion;
 
-    public LoginController(LoginVista vista, UsuarioRepositorio usuarios) {
+    public LoginController(LoginVista vista, UsuarioRepositorio usuarios, Consumer<Usuario> alIniciarSesion) {
         this.vista = vista;
         this.usuarios = usuarios;
+        this.alIniciarSesion = alIniciarSesion;
     }
 
     public void iniciarVista() {
@@ -44,9 +48,14 @@ public class LoginController {
             vista.mostrarMensaje("No existe el usuario.");
         } else if (usuario.iniciarSesion(password)) {
             vista.limpiarCampos();
-            vista.mostrarMensaje("Se inició sesión con éxito.");
+            iniciarSesion(usuario);
         } else {
             vista.mostrarMensaje("La clave es incorrecta.");
         }
+    }
+
+    private void iniciarSesion(Usuario usuario) {
+        vista.ocultarVentana();
+        alIniciarSesion.accept(usuario);
     }
 }

@@ -28,6 +28,10 @@ public class LoginVista {
         frame.setVisible(true);
     }
 
+    public void ocultarVentana() {
+        frame.setVisible(false);
+    }
+
     public void limpiarCampos() {
         txtUsuario.setText("");
         txtPassword.setText("");
