@@ -1,15 +1,18 @@
-package Planner.Modelos;
+package modelo;
 
-public class Asignatura {
+import java.util.Objects;
+
+/**
+ * Representa un ramo de la universidad.
+ */
+public class Clase {
     private final String codigo;
     private final String nombre;
 
-    public Asignatura(String codigo, String nombre) {
+    public Clase(String codigo, String nombre) {
         this.codigo = codigo;
         this.nombre = nombre;
     }
-
-    // === GETTERS Y SETTERS ===
 
     public String getCodigo() {
         return codigo;
@@ -19,23 +22,21 @@ public class Asignatura {
         return nombre;
     }
 
-    // === MÉTODOS ===
-
     public boolean verificarCodigo(String codigo) {
         return this.codigo.equals(codigo);
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (o == null) {
+    public boolean equals(Object objeto) {
+        if (objeto == null) {
             return false;
         }
 
-        if (o.getClass() != this.getClass()) {
+        if (objeto.getClass() != this.getClass()) {
             return false;
         }
 
-        Asignatura otro = (Asignatura) o;
+        Clase otro = (Clase) objeto;
         return codigo.equals(otro.getCodigo());
     }
 
