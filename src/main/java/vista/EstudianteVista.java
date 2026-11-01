@@ -7,15 +7,19 @@ import java.awt.event.ActionListener;
 public class EstudianteVista {
     private final JFrame frame = new JFrame();
 
-    // encabezado   ----------------------------------------------------------------------------------------------------
+    // encabezado       ------------------------------------------------------------------------------------------------
     private final JLabel lblNombreEstudiante = new JLabel();
     private final JLabel lblMatriculaEstudiante = new JLabel();
     private final JButton btnCerrarSesion = new JButton("Cerrar Sesión");
 
-    // verSemana    ----------------------------------------------------------------------------------------------------
+    // verSemana        ------------------------------------------------------------------------------------------------
     private final JButton btnAnteriorSemana = new JButton("Anterior Semana");
     private final JLabel lblEtiquetaSemana = new JLabel();
     private final JButton btnSiguienteSemana = new JButton("Siguiente Semana");
+
+    // calificarSemana  ------------------------------------------------------------------------------------------------
+    private final JComboBox<String> cmbCalificaciones = new JComboBox<>();
+    private final JButton btnCalificar = new JButton("Aplicar Calificación");
 
     public EstudianteVista() {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -25,6 +29,7 @@ public class EstudianteVista {
 
         frame.add(construirEncabezado(), BorderLayout.NORTH);
         frame.add(construirVerSemana(), BorderLayout.CENTER);
+        frame.add(construirCalificarSemana(), BorderLayout.SOUTH);
     }
 
     private JPanel construirEncabezado() {
@@ -75,6 +80,24 @@ public class EstudianteVista {
         return verSemana;
     }
 
+    private JPanel construirCalificarSemana() {
+        JPanel calificarSemana = new JPanel(new BorderLayout());
+
+        // SELECTOR DE CALIFICACIÓN A LA IZQUIERDA
+        // popularCalificador();
+        calificarSemana.add(cmbCalificaciones, BorderLayout.WEST);
+
+        // APLICADOR DE CALIFICACIÓN A LA DERECHA
+        calificarSemana.add(btnCalificar, BorderLayout.EAST);
+
+        return calificarSemana;
+    }
+
+    private void popularCalificador() {
+        // TODO
+        throw new UnsupportedOperationException("No se ha implementado el método");
+    }
+
     public void mostrarVentana() {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
@@ -102,6 +125,10 @@ public class EstudianteVista {
 
     public void agregarSiguienteSemanaListener(ActionListener a) {
         btnSiguienteSemana.addActionListener(a);
+    }
+
+    public void agregarCalificarListener(ActionListener a) {
+        btnCalificar.addActionListener(a);
     }
 
     public void cerrarVentana() {
