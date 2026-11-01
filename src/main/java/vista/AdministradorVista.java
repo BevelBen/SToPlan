@@ -11,7 +11,8 @@ public class AdministradorVista {
 
     public AdministradorVista() {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1000,1000);
+        frame.setResizable(false);
+        frame.setSize(800,600);
         frame.setLayout(new BorderLayout(8, 8));
         ((JComponent) frame.getContentPane()).setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
 
@@ -23,7 +24,7 @@ public class AdministradorVista {
         JTabbedPane tabs = new JTabbedPane();
         tabs.addTab("Calcular periodos", construirCalcularPeriodos());
         tabs.addTab("Estudiantes", construirEditarEstudiantes());
-        frame.add(tabs, BorderLayout.SOUTH);
+        frame.add(tabs, BorderLayout.CENTER);
     }
 
     public void mostrarVentana() {
@@ -44,8 +45,7 @@ public class AdministradorVista {
     }
 
     private JPanel construirCalcularPeriodos() {
-        JPanel panel = new JPanel(new BorderLayout(12, 0));
-        panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        JPanel panel = new JPanel(new BorderLayout());
 
         JPanel izquierda = new JPanel();
         izquierda.add(new JLabel("Elegir estudiantes y clase"));
@@ -59,8 +59,7 @@ public class AdministradorVista {
     }
 
     private JPanel construirEditarEstudiantes() {
-        JPanel panel = new JPanel(new BorderLayout(12, 0));
-        panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        JPanel panel = new JPanel(new BorderLayout());
 
         JPanel arriba = new JPanel();
         arriba.add(new JLabel("Registrar estudiantes"));
