@@ -1,6 +1,7 @@
 package modelo;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 /**
  * Representa una disponibilidad en el horario con una fecha, periodo, calificacion y estado.
@@ -9,28 +10,34 @@ public class Disponibilidad {
     private final LocalDate dia;
     private final Periodo periodo;
     private EstadoDisponibilidad estadoDisponibilidad;
-    private int calificacion;
+    private Calificacion calificacion;
 
     public Disponibilidad(LocalDate dia, Periodo periodo) {
         this.dia = dia;
         this.periodo = periodo;
         this.estadoDisponibilidad = EstadoDisponibilidad.NO_DISPONIBLE;
-        this.calificacion = 0;
+        this.calificacion = Calificacion.NO_ME_ACOMODA;
     }
 
-    public void actualizarCalificacion(int nuevaCalificacion) {
+    public void actualizarCalificacion(Calificacion calificacion) {
         if (estadoDisponibilidad == EstadoDisponibilidad.NO_DISPONIBLE) {
             throw new IllegalStateException("El periodo no se encuentra disponible.");
         }
-        if (nuevaCalificacion < 1 || nuevaCalificacion > 5) {
-            throw new IllegalArgumentException("La calificación debe estar entre 1 y 5.");
-        }
-        this.calificacion = nuevaCalificacion;
+        this.calificacion = calificacion;
     }
 
-    public void actualizarDisponibilidad(EstadoDisponibilidad estadoDisponibilidad) {
-        this.estadoDisponibilidad = estadoDisponibilidad;
-        this.calificacion = (this.estadoDisponibilidad == EstadoDisponibilidad.DISPONIBLE) ? 5 : 0;
+    public void actualizarCalificacion(int nuevaCalificacion) {
+        actualizarCalificacion(Calificacion.desdeValor(nuevaCalificacion));
+    }
+
+    public void marcarDispnible(Calificacion calificacion) {
+        this.estadoDisponibilidad = EstadoDisponibilidad.DISPONIBLE;
+        this.calificacion = calificacion;
+    }
+
+    public void marcarNoDisponible() {
+        this.estadoDisponibilidad = EstadoDisponibilidad.NO_DISPONIBLE;
+        this.calificacion = null;
     }
 
     public LocalDate getDia() {
@@ -45,7 +52,7 @@ public class Disponibilidad {
         return estadoDisponibilidad;
     }
 
-    public int getCalificacion() {
-        return calificacion;
+    public Optional<Calificacion> getCalificacion() {
+        return Optional.ofNullable(calificacion);
     }
 }
