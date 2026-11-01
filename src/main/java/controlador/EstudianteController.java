@@ -1,5 +1,6 @@
 package controlador;
 
+import modelo.Calificacion;
 import modelo.Estudiante;
 import vista.EstudianteVista;
 
@@ -27,6 +28,7 @@ public class EstudianteController {
         vista.setNombreEstudiante(estudiante.getNombre().toUpperCase());
         vista.setMatriculaEstudiante(estudiante.getMatricula());
         vista.agregarCerrarSesionListener(e -> cerrarSesion());
+        popularCalificador();
     }
 
     /**
@@ -43,5 +45,12 @@ public class EstudianteController {
      */
     private LocalDate hoy() {
         return LocalDate.now(reloj);
+    }
+
+    private void popularCalificador() {
+        Calificacion[] calificaciones = Calificacion.values();
+        for (Calificacion c : calificaciones) {
+            vista.popularCalificador(c.getEtiqueta());
+        }
     }
 }

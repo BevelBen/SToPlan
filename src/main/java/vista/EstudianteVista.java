@@ -93,9 +93,8 @@ public class EstudianteVista {
         return calificarSemana;
     }
 
-    private void popularCalificador() {
-        // TODO
-        throw new UnsupportedOperationException("No se ha implementado el método");
+    public void popularCalificador(String item) {
+        cmbCalificaciones.addItem(item);
     }
 
     public void mostrarVentana() {
