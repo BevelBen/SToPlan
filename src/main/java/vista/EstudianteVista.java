@@ -6,19 +6,48 @@ import java.awt.event.ActionListener;
 
 public class EstudianteVista {
     private final JFrame frame = new JFrame();
-    private final JLabel lblDatosEstudiante = new JLabel();
-    private final JButton btnCerrarSesion = new JButton();
+    private final JLabel lblNombreEstudiante = new JLabel();
+    private final JLabel lblMatriculaEstudiante = new JLabel();
+    private final JButton btnCerrarSesion = new JButton("Cerrar Sesión");
 
     public EstudianteVista() {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(1000,1000);
         frame.setLayout(new BorderLayout(8, 8));
 
+        frame.add(construirEncabezado(), BorderLayout.NORTH);
+    }
+
+    private JPanel construirEncabezado() {
         JPanel encabezado = new JPanel(new BorderLayout());
-        encabezado.add(lblDatosEstudiante, BorderLayout.WEST);
+        encabezado.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
+
+        JPanel datosEstudiante = new JPanel(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+
+        c.gridx = 0;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.weightx = 1;
+        c.anchor = GridBagConstraints.WEST;
+
+        lblNombreEstudiante.setHorizontalAlignment(SwingConstants.CENTER);
+        c.gridy = 0;
+        c.insets = new Insets(0, 0, 2, 0);
+        datosEstudiante.add(lblNombreEstudiante, c);
+
+        lblMatriculaEstudiante.setHorizontalAlignment(SwingConstants.CENTER);
+        c.gridy = 1;
+        datosEstudiante.add(lblMatriculaEstudiante, c);
+
+        encabezado.add(datosEstudiante, BorderLayout.WEST);
         encabezado.add(btnCerrarSesion, BorderLayout.EAST);
 
-        frame.add(encabezado, BorderLayout.CENTER);
+        return encabezado;
+    }
+
+    private JPanel construirVerSemana() {
+        // TODO
+        throw new UnsupportedOperationException("No se ha definido el método");
     }
 
     public void mostrarVentana() {
@@ -26,8 +55,12 @@ public class EstudianteVista {
         frame.setVisible(true);
     }
 
-    public void setDatosEstudiante(String datos) {
-        lblDatosEstudiante.setText(datos);
+    public void setNombreEstudiante(String nombre) {
+        lblNombreEstudiante.setText(nombre);
+    }
+
+    public void setMatriculaEstudiante(String matricula) {
+        lblMatriculaEstudiante.setText(matricula);
     }
 
     public void agregarCerrarSesionListener(ActionListener a) {

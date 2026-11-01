@@ -16,7 +16,8 @@ public class EstudianteController {
 
     public void iniciarVista() {
         vista.mostrarVentana();
-        vista.setDatosEstudiante(estudiante.toString());
+        vista.setNombreEstudiante(estudiante.getNombre().toUpperCase());
+        vista.setMatriculaEstudiante(estudiante.getMatricula());
         vista.agregarCerrarSesionListener(e -> cerrarSesion());
     }
 
