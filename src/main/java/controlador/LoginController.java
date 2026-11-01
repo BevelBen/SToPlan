@@ -18,11 +18,17 @@ public class LoginController {
         this.alIniciarSesion = alIniciarSesion;
     }
 
+    /**
+     * Establece el estado inicial de la vista.
+     */
     public void iniciarVista() {
         vista.mostrarVentana();
         vista.agregarLoginListener(e -> intentarLogin());
     }
 
+    /**
+     * El intento inicial del login, rescata los datos de la vista.
+     */
     private void intentarLogin() {
         try {
             Rut rut = leerRut();
@@ -43,6 +49,11 @@ public class LoginController {
         return new String(vista.getPassword());
     }
 
+    /**
+     * Se procesan los datos del login y actúa sobre ello.
+     * @param usuario el usuario en forma de cadena..
+     * @param password la contraseña en forma de cadena.
+     */
     private void procesarLogin(Usuario usuario, String password) {
         if (usuario == null) {
             vista.mostrarMensaje("No existe el usuario.");
@@ -54,6 +65,10 @@ public class LoginController {
         }
     }
 
+    /**
+     * Lógica al iniciar sesión.
+     * @param usuario
+     */
     private void iniciarSesion(Usuario usuario) {
         vista.ocultarVentana();
         alIniciarSesion.accept(usuario);

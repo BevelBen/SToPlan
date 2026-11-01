@@ -11,15 +11,19 @@ import vista.AdministradorVista;
 import vista.EstudianteVista;
 import vista.LoginVista;
 
+import java.time.Clock;
+
 public class Aplicacion {
     private final LoginVista loginVista;
     private final UsuarioRepositorioMemoria usuarios;
     private final LoginController loginController;
+    private final Clock reloj;
 
     public Aplicacion() {
         this.loginVista = new LoginVista();
         this.usuarios = new UsuarioRepositorioMemoria();
         this.loginController  = new LoginController(loginVista, usuarios, this::iniciarSesion);
+        this.reloj = Clock.systemDefaultZone();
     }
 
     public void iniciar() {
@@ -36,12 +40,12 @@ public class Aplicacion {
 
     private void iniciarSesionEstudiante(Estudiante estudiante) {
         EstudianteVista estudianteVista = new EstudianteVista();
-        new EstudianteController(estudiante, estudianteVista, this::cerrarSesion).iniciarVista();
+        new EstudianteController(estudiante, estudianteVista, this::cerrarSesion, reloj).iniciarVista();
     }
 
     private void iniciarSesionAdministrador(Administrador administrador) {
         AdministradorVista administradorVista = new AdministradorVista();
-        new AdministradorController(administrador, administradorVista, this::cerrarSesion).iniciarVista();
+        new AdministradorController(administrador, administradorVista, this::cerrarSesion, reloj).iniciarVista();
     }
 
     private void cerrarSesion() {
