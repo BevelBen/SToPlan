@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class EstudianteVista {
-    private final JFrame frame = new JFrame();
+    private final JFrame frame = new JFrame("Estudiante - Study Together Planner");
 
     // encabezado       ------------------------------------------------------------------------------------------------
     private final JLabel lblNombreEstudiante = new JLabel();
@@ -21,10 +21,11 @@ public class EstudianteVista {
     // calificarSemana  ------------------------------------------------------------------------------------------------
     private final JComboBox<String> cmbCalificaciones = new JComboBox<>();
     private final JButton btnCalificar = new JButton("Aplicar Calificación");
+    private final JButton btnEliminarDisponibilidad = new JButton("Eliminar Disponibilidad");
 
     public EstudianteVista() {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 500);
+        frame.setSize(800, 600);
         frame.setLayout(new BorderLayout(8, 8));
         ((JComponent) frame.getContentPane()).setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
 
@@ -50,6 +51,7 @@ public class EstudianteVista {
         datosEstudiante.add(lblNombreEstudiante, c);
 
         c.gridy = 1;
+        lblMatriculaEstudiante.setFont(lblMatriculaEstudiante.getFont().deriveFont(Font.PLAIN));
         datosEstudiante.add(lblMatriculaEstudiante, c);
 
         encabezado.add(datosEstudiante, BorderLayout.WEST);
@@ -88,8 +90,12 @@ public class EstudianteVista {
         // popularCalificador();
         calificarSemana.add(cmbCalificaciones, BorderLayout.WEST);
 
-        // APLICADOR DE CALIFICACIÓN A LA DERECHA
-        calificarSemana.add(btnCalificar, BorderLayout.EAST);
+        // CONFIGURACIÓN DE DISPONIBILIDAD A LA DERECHA
+        JPanel configuracionDisponibilidad = new JPanel(new BorderLayout(5, 0));
+        configuracionDisponibilidad.add(btnCalificar, BorderLayout.WEST);
+        configuracionDisponibilidad.add(btnEliminarDisponibilidad, BorderLayout.EAST);
+
+        calificarSemana.add(configuracionDisponibilidad, BorderLayout.EAST);
 
         return calificarSemana;
     }
@@ -119,12 +125,20 @@ public class EstudianteVista {
         btnAnteriorSemana.addActionListener(a);
     }
 
+    public void setAnteriorSemanaHabilitado(boolean habilitado) {
+        btnAnteriorSemana.setEnabled(habilitado);
+    }
+
     public void setEtiquetaSemana(String etiquetaSemana) {
         lblEtiquetaSemana.setText(etiquetaSemana);
     }
 
     public void agregarSiguienteSemanaListener(ActionListener a) {
         btnSiguienteSemana.addActionListener(a);
+    }
+
+    public void setSiguienteSemanaHabilitado(boolean habilitado) {
+        btnSiguienteSemana.setEnabled(habilitado);
     }
 
     public void agregarCalificarListener(ActionListener a) {

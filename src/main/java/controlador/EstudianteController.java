@@ -13,12 +13,14 @@ public class EstudianteController {
     private final EstudianteVista vista;
     private final Runnable alCerrarSesion;
     private final Clock reloj;
+    private LocalDate semana;
 
     public EstudianteController(Estudiante estudiante, EstudianteVista vista, Runnable alCerrarSesion, Clock reloj) {
         this.estudiante = estudiante;
         this.vista = vista;
         this.alCerrarSesion = alCerrarSesion;
         this.reloj = reloj;
+        this.semana = Semana.inicioSemana(hoy());
     }
 
     /**
@@ -28,9 +30,15 @@ public class EstudianteController {
         vista.mostrarVentana();
         vista.setNombreEstudiante(estudiante.getNombre().toUpperCase());
         vista.setMatriculaEstudiante(estudiante.getMatricula());
-        vista.agregarCerrarSesionListener(e -> cerrarSesion());
+
         popularCalificador();
-        semanaInicial();
+
+        // Listeners
+        vista.agregarCerrarSesionListener(e -> cerrarSesion());
+        vista.agregarAnteriorSemanaListener(e -> anteriorSemana());
+        vista.agregarSiguienteSemanaListener(e -> siguienteSemana());
+
+        refrescarNavegacion();
     }
 
     /**
@@ -49,6 +57,10 @@ public class EstudianteController {
         return LocalDate.now(reloj);
     }
 
+    private LocalDate semanaActual() {
+        return Semana.inicioSemana(hoy());
+    }
+
     private void popularCalificador() {
         Calificacion[] calificaciones = Calificacion.values();
         for (Calificacion c : calificaciones) {
@@ -56,7 +68,27 @@ public class EstudianteController {
         }
     }
 
-    private void semanaInicial() {
-        vista.setEtiquetaSemana(Semana.cadenaSemana(LocalDate.now(reloj)));
+    private void refrescarNavegacion() {
+        refrescarEtiquetaSemana();
+        refrescarBotonesNavegacion();
+    }
+
+    private void refrescarEtiquetaSemana() {
+        vista.setEtiquetaSemana(Semana.cadenaSemana(semana));
+    }
+
+    private void refrescarBotonesNavegacion() {
+        vista.setAnteriorSemanaHabilitado(semana.isAfter(semanaActual()));
+        vista.setSiguienteSemanaHabilitado(semana.isBefore(semanaActual().plusWeeks(10)));
+    }
+
+    private void anteriorSemana() {
+        semana = semana.plusWeeks(-1);
+        refrescarNavegacion();
+    }
+
+    private void siguienteSemana() {
+        semana = semana.plusWeeks(1);
+        refrescarNavegacion();
     }
 }
