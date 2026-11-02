@@ -35,6 +35,6 @@ public enum Calificacion {
 
     @Override
     public String toString() {
-        return etiqueta;
+        return valor + " - " + etiqueta;
     }
 }

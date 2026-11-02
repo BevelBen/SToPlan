@@ -50,7 +50,7 @@ public class EstudianteController {
     private void popularCalificador() {
         Calificacion[] calificaciones = Calificacion.values();
         for (Calificacion c : calificaciones) {
-            vista.popularCalificador(c.getEtiqueta());
+            vista.popularCalificador(c.toString());
         }
     }
 }
