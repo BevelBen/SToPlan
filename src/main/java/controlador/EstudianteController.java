@@ -2,6 +2,7 @@ package controlador;
 
 import modelo.Calificacion;
 import modelo.Estudiante;
+import modelo.Semana;
 import vista.EstudianteVista;
 
 import java.time.Clock;
@@ -29,6 +30,7 @@ public class EstudianteController {
         vista.setMatriculaEstudiante(estudiante.getMatricula());
         vista.agregarCerrarSesionListener(e -> cerrarSesion());
         popularCalificador();
+        semanaInicial();
     }
 
     /**
@@ -52,5 +54,9 @@ public class EstudianteController {
         for (Calificacion c : calificaciones) {
             vista.popularCalificador(c.toString());
         }
+    }
+
+    private void semanaInicial() {
+        vista.setEtiquetaSemana(Semana.cadenaSemana(LocalDate.now(reloj)));
     }
 }
