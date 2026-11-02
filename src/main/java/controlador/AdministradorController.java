@@ -1,15 +1,13 @@
 package controlador;
 
-import modelo.Administrador;
-import modelo.Clase;
-import modelo.Estudiante;
-import modelo.Semana;
+import modelo.*;
 import modelo.repositorio.ClaseRepositorio;
 import modelo.repositorio.UsuarioRepositorio;
 import vista.AdministradorVista;
 
 import java.time.Clock;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdministradorController {
@@ -17,16 +15,19 @@ public class AdministradorController {
     private final AdministradorVista vista;
     private final ClaseRepositorio clases;
     private final UsuarioRepositorio usuarios;
+    private final CalculadorPeriodos calculadorPeriodos;
     private final Runnable alCerrarSesion;
     private final Clock reloj;
     private LocalDate semana;
     private List<Clase> clasesMostradas;
+    private List<Estudiante> estudiantesMostrados;
 
     public AdministradorController(Administrador administrador, AdministradorVista vista, ClaseRepositorio clases, UsuarioRepositorio usuarios, Runnable alCerrarSesion, Clock reloj) {
         this.administrador = administrador;
         this.vista = vista;
         this.clases = clases;
         this.usuarios = usuarios;
+        this.calculadorPeriodos = new CalculadorPeriodos();
         this.alCerrarSesion = alCerrarSesion;
         this.reloj = reloj;
         this.semana = Semana.inicioSemana(hoy());
@@ -42,6 +43,7 @@ public class AdministradorController {
         vista.agregarAnteriorSemanaListener(e -> anteriorSemana());
         vista.agregarSiguienteSemanaListener(e -> siguienteSemana());
         vista.agregarClaseSeleccionadaListener(e -> alCambiarClase());
+        vista.agregarCalcularPeriodosListener(e -> calcularPeriodos());
 
         refrescarNavegacion();
         actualizarClases();
@@ -77,9 +79,9 @@ public class AdministradorController {
     private void actualizarEstudiantes() {
         int indice = vista.getClaseSeleccionada();
         Clase clase = clasesMostradas.get(indice);
-        List<Estudiante> estudiantesEnClase = usuarios.buscarPorClase(clase);
+        estudiantesMostrados = usuarios.buscarPorClase(clase);
         vista.limpiarListaEstudiantes();
-        for (Estudiante e : estudiantesEnClase) {
+        for (Estudiante e : estudiantesMostrados) {
             vista.agregarListaEstudiantes(e.toString());
         }
     }
@@ -107,5 +109,19 @@ public class AdministradorController {
     private void siguienteSemana() {
         semana = semana.plusWeeks(1);
         refrescarNavegacion();
+    }
+
+    private void calcularPeriodos() {
+        List<Estudiante> estudiantesSeleccionados = getEstudiantesSeleccionados();
+        vista.mostrarMensaje(calculadorPeriodos.calcularPeriodos(estudiantesSeleccionados, semana));
+    }
+
+    private List<Estudiante> getEstudiantesSeleccionados() {
+        int[] indices = vista.getEstudiantesSeleccionados();
+        List<Estudiante> estudiantesSeleccionados = new ArrayList<>();
+        for (int i : indices) {
+            estudiantesSeleccionados.add(estudiantesMostrados.get(i));
+        }
+        return estudiantesSeleccionados;
     }
 }
