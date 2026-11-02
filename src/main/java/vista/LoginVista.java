@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class LoginVista {
-    private final JFrame frame = new JFrame();
+    private final JFrame frame = new JFrame("Login - Study Together Planner");
     private final JTextField txtUsuario = new JTextField();
     private final JPasswordField txtPassword = new JPasswordField();
     private final JButton btnLogin = new JButton("Login");
