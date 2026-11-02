@@ -73,8 +73,8 @@ public class EstudianteController {
     }
 
     private void refrescarNavegacion() {
-        refrescarEtiquetaSemana();
         refrescarBotonesNavegacion();
+        refrescarEtiquetaSemana();
         refrescarTabla();
     }
 
