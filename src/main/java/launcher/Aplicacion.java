@@ -6,6 +6,7 @@ import controlador.LoginController;
 import modelo.Administrador;
 import modelo.Estudiante;
 import modelo.Usuario;
+import modelo.repositorio.memoria.ClaseRepositorioMemoria;
 import modelo.repositorio.memoria.UsuarioRepositorioMemoria;
 import vista.AdministradorVista;
 import vista.EstudianteVista;
@@ -16,12 +17,14 @@ import java.time.Clock;
 public class Aplicacion {
     private final LoginVista loginVista;
     private final UsuarioRepositorioMemoria usuarios;
+    private final ClaseRepositorioMemoria clases;
     private final LoginController loginController;
     private final Clock reloj;
 
     public Aplicacion() {
         this.loginVista = new LoginVista();
         this.usuarios = new UsuarioRepositorioMemoria();
+        this.clases = new ClaseRepositorioMemoria();
         this.loginController  = new LoginController(loginVista, usuarios, this::iniciarSesion);
         this.reloj = Clock.systemDefaultZone();
     }
@@ -45,7 +48,7 @@ public class Aplicacion {
 
     private void iniciarSesionAdministrador(Administrador administrador) {
         AdministradorVista administradorVista = new AdministradorVista();
-        new AdministradorController(administrador, administradorVista, this::cerrarSesion, reloj).iniciarVista();
+        new AdministradorController(administrador, administradorVista, clases, usuarios, this::cerrarSesion, reloj).iniciarVista();
     }
 
     private void cerrarSesion() {
