@@ -1,53 +1,31 @@
 package modelo;
 
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 /**
  * Representa un periodo de la universidad.
  */
-public class Periodo {
-    public static final int PERIODOS_EARLY = 4;
-    public static final int PERIODOS_LATE = 6;
-    public static final int DURACION_MINUTOS = 60;
-    public static final int RECESO_MINUTOS = 10;
-
-    public static final List<Periodo> PERIODOS_DIA = construirPeriodos();
+public enum Periodo {
+    P1(1, 8, 30),
+    P2(2, 9, 40),
+    P3(3, 10, 50),
+    P4(4, 12, 0),
+    P5(5, 14, 30),
+    P6(6, 15, 40),
+    P7(7, 16, 50),
+    P8(8, 18, 0),
+    P9(9, 19, 10),
+    P10(10, 20, 20);
 
     private final int numero;
     private final LocalTime horaInicio;
     private final LocalTime horaFin;
 
-    public Periodo(int numero, LocalTime horaInicio, LocalTime horaFin) {
+    Periodo(int numero, int hora, int minuto) {
         this.numero = numero;
-        this.horaInicio = horaInicio;
-        this.horaFin = horaFin;
-    }
-
-    public static List<Periodo> construirPeriodos() {
-        List<Periodo> periodos = new ArrayList<>();
-        int numero = 1;
-        int paso = DURACION_MINUTOS + RECESO_MINUTOS;
-
-        LocalTime inicio = LocalTime.of(8, 30);
-        for (int i = 0; i < PERIODOS_EARLY; i++) {
-            periodos.add(new Periodo(numero++, inicio, inicio.plusMinutes(DURACION_MINUTOS)));
-            inicio = inicio.plusMinutes(paso);
-        }
-
-        inicio = LocalTime.of(14, 30);
-        for (int i = 0; i < PERIODOS_LATE; i++) {
-            periodos.add(new Periodo(numero++, inicio, inicio.plusMinutes(DURACION_MINUTOS)));
-            inicio = inicio.plusMinutes(paso);
-        }
-
-        return List.copyOf(periodos);
-    }
-
-    public String etiquetaHorario() {
-        return horaInicio + " " + horaFin;
+        this.horaInicio = LocalTime.of(hora, minuto);
+        final int DURACION = 60;
+        this.horaFin = horaInicio.plusMinutes(DURACION);
     }
 
     public int getNumero() {
@@ -62,22 +40,8 @@ public class Periodo {
         return horaFin;
     }
 
-    @Override
-    public boolean equals(Object objeto) {
-        if (objeto == null) {
-            return false;
-        }
-        if (objeto.getClass() != this.getClass()) {
-            return false;
-        }
-
-        Periodo otro = (Periodo) objeto;
-        return (this.numero == otro.numero);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(numero);
+    public String etiquetaHorario() {
+        return horaInicio + " " + horaFin;
     }
 
     @Override
