@@ -1,8 +1,12 @@
 package vista;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.ArrayList;
 
 public class EstudianteVista {
     private final JFrame frame = new JFrame("Estudiante - Study Together Planner");
@@ -16,7 +20,8 @@ public class EstudianteVista {
     private final JButton btnAnteriorSemana = new JButton("Anterior Semana");
     private final JLabel lblEtiquetaSemana = new JLabel();
     private final JButton btnSiguienteSemana = new JButton("Siguiente Semana");
-    private final JTable tabla = new JTable();
+    private final DefaultTableModel modeloTabla = new DefaultTableModel(12, 7);
+    private final JTable tabla = new JTable(modeloTabla);
 
     // calificarSemana  ------------------------------------------------------------------------------------------------
     private final JComboBox<String> cmbCalificaciones = new JComboBox<>();
@@ -78,9 +83,18 @@ public class EstudianteVista {
         verSemana.add(navegadorSemana, BorderLayout.NORTH);
 
         // TABLA DE SEMANAS
-        verSemana.add(tabla, BorderLayout.CENTER);
+        verSemana.add(construirTabla(), BorderLayout.CENTER);
 
         return verSemana;
+    }
+
+    private JScrollPane construirTabla() {
+        tabla.setTableHeader(null);
+        tabla.setCellSelectionEnabled(true);
+        tabla.setRowHeight(32);
+        tabla.getColumnModel().getColumn(0).setPreferredWidth(190);
+        ((DefaultTableCellRenderer) tabla.getDefaultRenderer(Object.class)).setHorizontalAlignment(SwingConstants.CENTER);
+        return new JScrollPane(tabla);
     }
 
     private JPanel construirCalificarSemana() {
@@ -100,8 +114,30 @@ public class EstudianteVista {
         return calificarSemana;
     }
 
+    public void setCelda(int fila, int columna, String texto) {
+        modeloTabla.setValueAt(texto, fila, columna);
+    }
+
+    public List<int[]> getCeldasSeleccionadas() {
+        List<int[]> seleccionadas = new ArrayList<>();
+        for (int fila : tabla.getSelectedRows()) {
+            for (int columna : tabla.getSelectedColumns()) {
+                seleccionadas.add(new int[]{fila, columna});
+            }
+        }
+        return seleccionadas;
+    }
+
+    public void limpiarSeleccion() {
+        tabla.clearSelection();
+    }
+
     public void popularCalificador(String item) {
         cmbCalificaciones.addItem(item);
+    }
+
+    public int getCalificacionSeleccionada() {
+        return cmbCalificaciones.getSelectedIndex();
     }
 
     public void mostrarVentana() {
@@ -143,6 +179,18 @@ public class EstudianteVista {
 
     public void agregarCalificarListener(ActionListener a) {
         btnCalificar.addActionListener(a);
+    }
+
+    public void agregarEliminarDisponibilidadListener(ActionListener a) {
+        btnEliminarDisponibilidad.addActionListener(a);
+    }
+
+    public void mostrarError(String mensaje) {
+        JOptionPane.showMessageDialog(frame, mensaje, "Ha ocurrido un error", JOptionPane.WARNING_MESSAGE);
+    }
+
+    public void mostrarMensaje(String mensaje) {
+        JOptionPane.showMessageDialog(frame, mensaje);
     }
 
     public void cerrarVentana() {
