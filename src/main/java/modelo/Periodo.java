@@ -17,8 +17,8 @@ public enum Periodo {
     P9(9, 19, 10),
     P10(10, 20, 20);
 
-    public static LocalTime HORA_INICIO_ALMUERZO = LocalTime.of(13, 0);
-    public static LocalTime HORA_FIN_ALMUERZO = LocalTime.of(14, 10);
+    public static final LocalTime HORA_INICIO_ALMUERZO = LocalTime.of(13, 0);
+    public static final LocalTime HORA_FIN_ALMUERZO = LocalTime.of(14, 10);
 
     private final int numero;
     private final LocalTime horaInicio;
