@@ -119,7 +119,7 @@ public class EstudianteController {
             return clase.get().codigo();
         }
         if (!estudiante.esEditable(franja, hoy())) {
-            return "-";
+            return "No Disponible";
         }
         return estudiante.calificacionEn(franja).map(c -> String.valueOf(c.getValor())).orElse("");
     }
