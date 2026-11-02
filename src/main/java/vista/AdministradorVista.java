@@ -22,10 +22,13 @@ public class AdministradorVista {
     private final JLabel lblEtiquetaSemana = new JLabel();
     private final JButton btnSiguienteSemana = new JButton("Siguiente Semana");
 
+    // calcularPeriodos ------------------------------------------------------------------------------------------------
+    private final JButton btnCalcularPeriodos = new JButton("Calcular Periodos");
+
     public AdministradorVista() {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
-        frame.setSize(800,600);
+        frame.setSize(1400,1000);
         frame.setLayout(new BorderLayout(8, 8));
         ((JComponent) frame.getContentPane()).setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
 
@@ -51,8 +54,9 @@ public class AdministradorVista {
 
         panel.add(izquierda, BorderLayout.WEST);
 
-        JPanel derecha = new JPanel();
-        derecha.add(new JLabel("Ver resultados y calcular los periodos, elegir semana"));
+        JPanel derecha = new JPanel(new BorderLayout(0, 10));
+        derecha.add(btnCalcularPeriodos, BorderLayout.NORTH);
+        derecha.add(new JLabel("Aca se verán los resultados del calculador de periodos."), BorderLayout.CENTER);
         panel.add(derecha, BorderLayout.EAST);
 
         return panel;
@@ -141,5 +145,17 @@ public class AdministradorVista {
 
     public void setSiguienteSemanaHabilitado(boolean habilitado) {
         btnSiguienteSemana.setEnabled(habilitado);
+    }
+
+    public void agregarCalcularPeriodosListener(ActionListener a) {
+        btnCalcularPeriodos.addActionListener(a);
+    }
+
+    public void mostrarError(String mensaje) {
+        JOptionPane.showMessageDialog(frame, mensaje, "Ha ocurrido un error", JOptionPane.WARNING_MESSAGE);
+    }
+
+    public void mostrarMensaje(String mensaje) {
+        JOptionPane.showMessageDialog(frame, mensaje);
     }
 }
