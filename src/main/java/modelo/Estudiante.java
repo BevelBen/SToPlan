@@ -101,10 +101,6 @@ public class Estudiante extends Usuario {
         return List.copyOf(clases);
     }
 
-    public Map<FranjaSemanal, Clase> getHorarioLectivo() {
-        return Collections.unmodifiableMap(new TreeMap<>(horarioLectivo));
-    }
-
     // Validaciones ----------------------------------------------------------------------------------------------------
 
     private void validarEditable(Franja franja, LocalDate hoy) {

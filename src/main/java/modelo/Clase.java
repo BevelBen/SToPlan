@@ -7,10 +7,6 @@ import java.util.Objects;
  */
 public record Clase(String codigo, String nombre) {
 
-    public boolean verificarCodigo(String codigo) {
-        return this.codigo.equals(codigo);
-    }
-
     @Override
     public boolean equals(Object objeto) {
         if (objeto == null) {
