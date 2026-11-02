@@ -57,7 +57,8 @@ public class AdministradorVista {
         JPanel derecha = new JPanel(new BorderLayout(0, 10));
         derecha.add(btnCalcularPeriodos, BorderLayout.NORTH);
         derecha.add(new JLabel("Aca se verán los resultados del calculador de periodos."), BorderLayout.CENTER);
-        panel.add(derecha, BorderLayout.EAST);
+
+        panel.add(derecha, BorderLayout.CENTER);
 
         return panel;
     }
