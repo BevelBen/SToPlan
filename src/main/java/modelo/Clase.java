@@ -5,22 +5,7 @@ import java.util.Objects;
 /**
  * Representa un ramo de la universidad.
  */
-public class Clase {
-    private final String codigo;
-    private final String nombre;
-
-    public Clase(String codigo, String nombre) {
-        this.codigo = codigo;
-        this.nombre = nombre;
-    }
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
+public record Clase(String codigo, String nombre) {
 
     public boolean verificarCodigo(String codigo) {
         return this.codigo.equals(codigo);
@@ -37,7 +22,7 @@ public class Clase {
         }
 
         Clase otro = (Clase) objeto;
-        return codigo.equals(otro.getCodigo());
+        return codigo.equals(otro.codigo());
     }
 
     @Override

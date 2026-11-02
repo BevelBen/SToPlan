@@ -55,7 +55,7 @@ public class Estudiante extends Usuario {
     private void validarFranja(FranjaSemanal franjaSemanal, Clase clase) {
         Clase actual = horarioLectivo.get(franjaSemanal);
         if (actual != null && !actual.equals(clase)) {
-            throw new IllegalStateException("Choque de horario en " + franjaSemanal + ": ya tiene " + actual.getCodigo() + ".");
+            throw new IllegalStateException("Choque de horario en " + franjaSemanal + ": ya tiene " + actual.codigo() + ".");
         }
     }
 
@@ -113,7 +113,7 @@ public class Estudiante extends Usuario {
         }
         Optional<Clase> clase = claseEn(franja);
         if (clase.isPresent()) {
-            throw new IllegalStateException("Tienes clase en ese periodo (" + clase.get().getCodigo() + ").");
+            throw new IllegalStateException("Tienes clase en ese periodo (" + clase.get().codigo() + ").");
         }
     }
 
