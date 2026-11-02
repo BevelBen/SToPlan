@@ -13,8 +13,26 @@ public class UsuarioRepositorioMemoria implements UsuarioRepositorio {
     public UsuarioRepositorioMemoria() {
         Estudiante estudiante1 = new Estudiante(Rut.generarRut("223825087"), "Benjamín Rodrigo Morales Moreno", "24", 2025);
         guardarUsuario(estudiante1);
+
+        // Clases
+
+        Clase multivariable = new Clase("MAT101", "Multi");
+        estudiante1.agregarClase(multivariable);
+        estudiante1.agregarHorarioLectivo(new FranjaSemanal(DiaSemana.MARTES, Periodo.P3), multivariable);
+        estudiante1.agregarHorarioLectivo(new FranjaSemanal(DiaSemana.MARTES, Periodo.P2), multivariable);
+
+        // -----
+
         Estudiante estudiante2 = new Estudiante(Rut.generarRut("108704578"), "NuevoEstudiante", "24", 2023);
         guardarUsuario(estudiante2);
+
+        // Clases
+
+        estudiante2.agregarClase(multivariable);
+        estudiante2.agregarHorarioLectivo(new FranjaSemanal(DiaSemana.JUEVES, Periodo.P7), multivariable);
+
+        // -----
+
         Administrador administrador1 = new Administrador(Rut.generarRut("11.111.111-1"), "Funcionario1", "admin");
         guardarUsuario(administrador1);
     }

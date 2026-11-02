@@ -27,4 +27,8 @@ public final class Semana {
     public static String cadenaSemana(LocalDate hoy) {
         return inicioSemana(hoy).format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + " - " + finSemana(hoy).format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
+
+    public static LocalDate fechaDelDia(LocalDate inicioSemana, DayOfWeek dia) {
+        return inicioSemana.plusDays(dia.getValue() - DayOfWeek.MONDAY.getValue());
+    }
 }

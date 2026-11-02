@@ -17,6 +17,9 @@ public enum Periodo {
     P9(9, 19, 10),
     P10(10, 20, 20);
 
+    public static LocalTime HORA_INICIO_ALMUERZO = LocalTime.of(13, 0);
+    public static LocalTime HORA_FIN_ALMUERZO = LocalTime.of(14, 10);
+
     private final int numero;
     private final LocalTime horaInicio;
     private final LocalTime horaFin;
@@ -26,6 +29,15 @@ public enum Periodo {
         this.horaInicio = LocalTime.of(hora, minuto);
         final int DURACION = 60;
         this.horaFin = horaInicio.plusMinutes(DURACION);
+    }
+
+    public static Periodo deNumero(int numero) {
+        for (Periodo p : Periodo.values()) {
+            if (p.getNumero() == numero) {
+                return p;
+            }
+        }
+        throw new IllegalArgumentException("No existe tal numero de periodo");
     }
 
     public int getNumero() {

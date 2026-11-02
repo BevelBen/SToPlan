@@ -1,12 +1,12 @@
 package controlador;
 
-import modelo.Calificacion;
-import modelo.Estudiante;
-import modelo.Semana;
+import modelo.*;
 import vista.EstudianteVista;
 
 import java.time.Clock;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 public class EstudianteController {
     private final Estudiante estudiante;
@@ -39,6 +39,8 @@ public class EstudianteController {
         vista.agregarSiguienteSemanaListener(e -> siguienteSemana());
 
         refrescarNavegacion();
+
+        iniciarTabla();
     }
 
     /**
@@ -71,6 +73,7 @@ public class EstudianteController {
     private void refrescarNavegacion() {
         refrescarEtiquetaSemana();
         refrescarBotonesNavegacion();
+        refrescarTabla();
     }
 
     private void refrescarEtiquetaSemana() {
@@ -80,6 +83,51 @@ public class EstudianteController {
     private void refrescarBotonesNavegacion() {
         vista.setAnteriorSemanaHabilitado(semana.isAfter(semanaActual()));
         vista.setSiguienteSemanaHabilitado(semana.isBefore(semanaActual().plusWeeks(10)));
+    }
+
+    private void iniciarTabla() {
+        vista.setCelda(0, 0, "Periodo");
+        vista.setCelda(5, 0, "Almuerzo " + Periodo.HORA_INICIO_ALMUERZO + " - " + Periodo.HORA_FIN_ALMUERZO);
+        for (int columna = 1; columna < 7; columna++) {
+            vista.setCelda(5, columna, "Almuerzo");
+        }
+    }
+
+    private void refrescarTabla() {
+        for (int columna = 1; columna < 7; columna++) {
+            DiaSemana dia = diaDeColumna(columna);
+            vista.setCelda(0, columna, dia.getNombre() + " " + Semana.fechaDelDia(semana, dia.getDayOfWeek()).format(DateTimeFormatter.ofPattern("dd/MM")));
+        }
+
+        for (int fila = 1; fila < 12; fila++) {
+            if (fila == 5) {
+                continue;
+            }
+            Periodo periodo = periodoDeFila(fila);
+            vista.setCelda(fila, 0, periodo.getNumero() + "° " + periodo.etiquetaHorario());
+            for (int columna = 1; columna < 7; columna++) {
+                vista.setCelda(fila, columna, textoDeCelda(new Franja(Semana.fechaDelDia(semana, diaDeColumna(columna).getDayOfWeek()), periodoDeFila(fila))));
+            }
+        }
+    }
+
+    private String textoDeCelda(Franja franja) {
+        Optional<Clase> clase = estudiante.claseEn(franja);
+        if (clase.isPresent()) {
+            return clase.get().codigo();
+        }
+        if (!estudiante.esEditable(franja, hoy())) {
+            return "-";
+        }
+        return estudiante.calificacionEn(franja).map(c -> String.valueOf(c.getValor())).orElse("");
+    }
+
+    private static Periodo periodoDeFila(int fila) {
+        return Periodo.deNumero(fila < 5 ? fila : fila - 1);
+    }
+
+    private static DiaSemana diaDeColumna(int columna) {
+        return DiaSemana.values()[columna - 1];
     }
 
     private void anteriorSemana() {
