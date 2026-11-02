@@ -35,6 +35,7 @@ public class EstudianteVista {
 
     public EstudianteVista() {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setResizable(false);
         frame.setSize(800, 600);
         frame.setLayout(new BorderLayout(8, 8));
         ((JComponent) frame.getContentPane()).setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
