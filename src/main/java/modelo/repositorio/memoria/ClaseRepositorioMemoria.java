@@ -9,6 +9,11 @@ import java.util.List;
 public class ClaseRepositorioMemoria implements ClaseRepositorio {
     private final List<Clase> clases = new ArrayList<>();
 
+    public ClaseRepositorioMemoria() {
+        clases.add(new Clase("MAT101", "Multi"));
+        clases.add(new Clase("FIS101", "Física 1"));
+    }
+
     @Override
     public List<Clase> listarClases() {
         return List.copyOf(clases);

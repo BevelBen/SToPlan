@@ -28,7 +28,9 @@ public class UsuarioRepositorioMemoria implements UsuarioRepositorio {
 
         // Clases
 
+        Clase fisica = new Clase("FIS101", "Física 1");
         estudiante2.agregarClase(multivariable);
+        estudiante2.agregarClase(fisica);
         estudiante2.agregarHorarioLectivo(new FranjaSemanal(DiaSemana.JUEVES, Periodo.P7), multivariable);
 
         // -----
