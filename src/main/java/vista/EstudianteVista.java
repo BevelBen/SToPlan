@@ -16,6 +16,7 @@ public class EstudianteVista {
     private final JButton btnAnteriorSemana = new JButton("Anterior Semana");
     private final JLabel lblEtiquetaSemana = new JLabel();
     private final JButton btnSiguienteSemana = new JButton("Siguiente Semana");
+    private final JTable tabla = new JTable();
 
     // calificarSemana  ------------------------------------------------------------------------------------------------
     private final JComboBox<String> cmbCalificaciones = new JComboBox<>();
@@ -75,7 +76,7 @@ public class EstudianteVista {
         verSemana.add(navegadorSemana, BorderLayout.NORTH);
 
         // TABLA DE SEMANAS
-        verSemana.add(new JLabel("TABLA", SwingConstants.CENTER), BorderLayout.CENTER);
+        verSemana.add(tabla, BorderLayout.CENTER);
 
         return verSemana;
     }
