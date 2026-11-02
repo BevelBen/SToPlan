@@ -20,7 +20,12 @@ public class EstudianteVista {
     private final JButton btnAnteriorSemana = new JButton("Anterior Semana");
     private final JLabel lblEtiquetaSemana = new JLabel();
     private final JButton btnSiguienteSemana = new JButton("Siguiente Semana");
-    private final DefaultTableModel modeloTabla = new DefaultTableModel(12, 7);
+    private final DefaultTableModel modeloTabla = new DefaultTableModel(12, 7) {
+        @Override
+        public boolean isCellEditable(int fila, int columna) {
+            return false;
+        }
+    };
     private final JTable tabla = new JTable(modeloTabla);
 
     // calificarSemana  ------------------------------------------------------------------------------------------------

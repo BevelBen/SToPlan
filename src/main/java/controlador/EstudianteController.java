@@ -37,6 +37,8 @@ public class EstudianteController {
         vista.agregarCerrarSesionListener(e -> cerrarSesion());
         vista.agregarAnteriorSemanaListener(e -> anteriorSemana());
         vista.agregarSiguienteSemanaListener(e -> siguienteSemana());
+        vista.agregarCalificarListener(e -> calificarSeleccion());
+        vista.agregarEliminarDisponibilidadListener(e -> eliminarSeleccion());
 
         refrescarNavegacion();
 
@@ -120,6 +122,51 @@ public class EstudianteController {
             return "-";
         }
         return estudiante.calificacionEn(franja).map(c -> String.valueOf(c.getValor())).orElse("");
+    }
+
+    private void calificarSeleccion() {
+        Calificacion calificacion = Calificacion.desdeValor(vista.getCalificacionSeleccionada() + 1);
+        if (vista.getCeldasSeleccionadas().isEmpty()) {
+            vista.mostrarError("Selecciona primero uno o más periodos de la tabla.");
+            return;
+        }
+        LocalDate hoy = hoy();
+        for (int[] celda : vista.getCeldasSeleccionadas()) {
+            int fila = celda[0];
+            int columna = celda[1];
+            if (fila == 0 || columna == 0 || fila == 5) {
+                continue;
+            }
+            Franja franja = new Franja(Semana.fechaDelDia(semana, diaDeColumna(columna).getDayOfWeek()), periodoDeFila(fila));
+            if (!estudiante.esEditable(franja, hoy)) {
+                continue;
+            }
+            estudiante.calificarEn(franja, calificacion, hoy);
+        }
+        vista.limpiarSeleccion();
+        refrescarTabla();
+    }
+
+    private void eliminarSeleccion() {
+        if (vista.getCeldasSeleccionadas().isEmpty()) {
+            vista.mostrarError("Selecciona primero uno o más periodos de la tabla.");
+            return;
+        }
+        LocalDate hoy = hoy();
+        for (int[] celda : vista.getCeldasSeleccionadas()) {
+            int fila = celda[0];
+            int columna = celda[1];
+            if (fila == 0 || columna == 0 || fila == 5) {
+                continue;
+            }
+            Franja franja = new Franja(Semana.fechaDelDia(semana, diaDeColumna(columna).getDayOfWeek()), periodoDeFila(fila));
+            Optional<Calificacion> calificacionSupuesta = estudiante.calificacionEn(franja);
+            if (calificacionSupuesta.isPresent()) {
+                estudiante.quitarCalificacion(franja, hoy);
+            }
+        }
+        vista.limpiarSeleccion();
+        refrescarTabla();
     }
 
     private static Periodo periodoDeFila(int fila) {
